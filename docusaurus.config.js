@@ -18,6 +18,7 @@ const config = {
 	organizationName: "ketiboldiais", // Usually your GitHub org/user name.
 	deploymentBranch: "main",
 	projectName: "jscratedocs", // Usually your repo name.
+	trailingSlash: false,
 	i18n: {
 		defaultLocale: "en",
 		locales: ["en"],

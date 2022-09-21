@@ -15,7 +15,6 @@ const config = {
 	onBrokenLinks: "throw",
 	onBrokenMarkdownLinks: "warn",
 	favicon: "img/favicon.ico",
-	trailingSlash: false,
 	organizationName: "ketiboldiais", // Usually your GitHub org/user name.
 	projectName: "jscratedocs", // Usually your repo name.
 	i18n: {

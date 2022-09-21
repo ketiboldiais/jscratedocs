@@ -1,0 +1,162 @@
+---
+sidebar_label: "Bitset"
+---
+
+# Bitset
+
+A `Bitset` is an array consisting of only ones and zeros. Below, the
+variable 𝐵 denotes an instance of `Bitset`. The bitset class operates on a
+single unsigned 32-bit integer array in JavaScript, and the methods below
+operate with bitwise operators. This leads to two benefits: (1) Operations
+on bitsets are fairly quick, and (2) memory consumption is low. This is
+because the methods operate on the individual bits of the integer array.
+Thus, given an integer array of size 20, there are 640 available indices.
+
+The caveats: Data representation is limited. Bitsets only take 1s and 0s,
+and certain array operations (particularly those that require handling
+array arguments) will still take linear time.
+
+Note that the `push()` method requires an extension of the integer array
+(similar to a "pushback" in other libraries) after certain thresholds. The
+threshold depends on the last time the array was extended and requires
+copying over the elements of the previous integer array to the new array.
+The complexity analyses below result from an amortized analysis.
+
+## `bitset(size?:number)`
+
+- Optional size parameter that sets the bitset's size. Defaults to 10
+  (yielding 320 available indices before extension is needed).
+
+## `𝐵.getBit(𝑖)`
+
+- Returns the bit at index 𝑖.
+- ${\Omega(1)}$
+- ${\Theta(1)}$
+- ${O(1)}$
+
+## `𝐵.setBit(𝑖)`
+
+- Sets the bit at index 𝑖 to 1.
+- ${\Omega(1)}$
+- ${\Theta(1)}$
+- ${O(1)}$
+
+## `𝐵.clearBit(𝑖)`
+
+- Sets the bit at index 𝑖 to 0.
+- ${\Omega(1)}$
+- ${\Theta(1)}$
+- ${O(1)}$
+
+## `𝐵.toggle(i)`
+
+- Toggles the bit at index 𝑖 (1 to 0, or 0 to 1).
+- ${\Omega(1)}$
+- ${\Theta(1)}$
+- ${O(1)}$
+
+## `𝐵.reset()`
+
+- Sets all of 𝐵's bits to zero
+- ${\Omega(1)}$
+- ${\Theta(1)}$
+- ${O(1)}$
+
+## `𝐵.push(𝑏)`
+
+- Inserts 𝑏 at the end of the bitset. If 𝑏 is 1, 1 inserted, otherwise, 0.
+- ${\Omega(1)}$
+- ${\Theta(1)}$
+- ${O(1)}$
+
+## `𝐵.pop()`
+
+- Removes the last bit in 𝐵
+- ${\Omega(1)}$
+- ${\Theta(1)}$
+- ${O(1)}$
+
+## `𝐵.arrayed()`
+
+- Returns the bitset as a native JavaScript array
+- ${\Omega(1)}$
+- ${\Theta(n)}$
+- ${O(n)}$
+- Requires iterating over the whole integer array
+
+## `𝐵.uInt()`
+
+- Returns the current bitset as an unsigned integer
+- ${\Omega(1)}$
+- ${\Theta(n)}$
+- ${O(n)}$
+- Requires iterating over the whole integer array
+
+## `𝐵.shove(𝑏[])`
+
+- Pushes the elements of `𝑏[]` (an array of 1s and 0s) into the bitset.
+- ${\Omega(1)}$
+- ${\Theta(n)}$
+- ${\Omega(n)}$
+- Requires iterating over the user input
+
+## `𝐵.or(bits: 𝐶)`
+
+- Applies bitwise `or` on 𝐵 with 𝐶. 𝐶 must be an array of 1s and 0s or an
+  instance of `Bitset`
+- ${\Omega(1)}$
+- ${\Theta(n)}$
+- ${O(n)}$ |
+- Requires iterating over the user input
+
+## `𝐵.and(bits: 𝐶)`
+
+- Applies bitwise `and` on 𝐵 with 𝐶. 𝐶 must be an array of 1s and 0s or an
+  instance of `Bitset`
+- ${\Omega(1)}$
+- ${\Theta(n)}$
+- ${\Omega(n)}$
+- Requires iterating over the user input
+
+## `𝐵.not()`
+
+- Applies bitwise `not` on 𝐵
+- ${\Omega(1)}$
+- ${\Theta(n)}$
+- ${O(n)}$
+- Requires iterating over the integer array
+
+## `𝐵.xor(bits: 𝐶)`
+
+- Applies bitwise `xor` on 𝐵 with 𝐶. 𝐶 must be an array of 1s and 0s or an
+  instance of `Bitset`
+- ${\Omega(1)}$
+- ${\Theta(n)}$
+- ${O(n)}$
+- Requires iterating over the integer array
+
+## `𝐵.nor(bits: 𝐶)`
+
+- Applies bitwise `nor` on 𝐵 with 𝐶. 𝐶 must be an array of 1s and 0s or an
+  instance of `Bitset`
+- ${\Omega(1)}$
+- ${\Theta(n)}$
+- ${O(n)}$
+- Requires iterating over the integer array
+
+## `𝐵.nand(bits: 𝐶)`
+
+- Applies bitwise `nand` on 𝐵 with 𝐶. 𝐶 must be an array of 1s and 0s or an
+  instance of `Bitset`
+- ${\Omega(1)}$
+- ${\Theta(n)}$
+- ${O(n)}$
+- Requires iterating over the integer array
+
+## `𝐵.length`
+
+- Returns the current length of the bitset
+
+## `𝐵.print()`
+
+- Prints the current state of the bitset to the console

@@ -1,0 +1,81 @@
+---
+sidebar_label: "AVL Tree"
+---
+
+import { AVLTree } from "@site/src/components/dist";
+
+## AVLTree
+
+The `AVLTree` class implements an AVL tree. The AVL tree is a one type of
+self-balancing binary search tree.
+
+<AVLTree
+	data={[
+		{ c: 33, p: "" },
+		{ c: 13, p: 33 },
+		{ c: 53, p: 33 },
+		{ c: 9, p: 13 },
+		{ c: 21, p: 13 },
+		{ c: 8, p: 9 },
+		{ c: 11, p: 9 },
+		{ c: null, p: 53, h: true },
+		{ c: 61, p: 53 },
+	]}
+	cluster={true}
+/>
+
+## Constructor
+
+To create a new `AVLTree` instance:
+
+```javascript
+import { AvlTree } from "@crates";
+import { Print } from "@util";
+
+const avl = AvlTree(20, 10, 50, 8, 15, 46, 60, 11, 32, 48);
+Print(avl);
+```
+
+```terminal
+└─ root
+   ├─ value: 20
+   ├─ left
+   │  ├─ value: 10
+   │  ├─ left
+   │  │  ├─ value: 8
+   │  │  ├─ left: null
+   │  │  ├─ right: null
+   │  │  └─ height: 1
+   │  ├─ right
+   │  │  ├─ value: 15
+   │  │  ├─ left
+   │  │  │  ├─ value: 11
+   │  │  │  ├─ left: null
+   │  │  │  ├─ right: null
+   │  │  │  └─ height: 1
+   │  │  ├─ right: null
+   │  │  └─ height: 2
+   │  └─ height: 3
+   ├─ right
+   │  ├─ value: 50
+   │  ├─ left
+   │  │  ├─ value: 46
+   │  │  ├─ left
+   │  │  │  ├─ value: 32
+   │  │  │  ├─ left: null
+   │  │  │  ├─ right: null
+   │  │  │  └─ height: 1
+   │  │  ├─ right
+   │  │  │  ├─ value: 48
+   │  │  │  ├─ left: null
+   │  │  │  ├─ right: null
+   │  │  │  └─ height: 1
+   │  │  └─ height: 2
+   │  ├─ right
+   │  │  ├─ value: 60
+   │  │  ├─ left: null
+   │  │  ├─ right: null
+   │  │  └─ height: 1
+   │  └─ height: 3
+   └─ height: 4
+```

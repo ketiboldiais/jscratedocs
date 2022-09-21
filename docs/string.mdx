@@ -1,0 +1,98 @@
+---
+sidebar_label: "String API"
+sidebar_position: 3
+---
+
+# Str
+
+The `str` module provides several static methods on strings. Note that
+there are unavoidable tradeoffs to working with strings in JavaScript. See
+the _Caveats_ section below.
+
+## isIsomorph(𝑆1, 𝑆2)
+
+Returns `true` if 𝑆1 is an isomorphism of 𝑆2, `false` otherwise.
+
+## join(𝑆1, 𝑆2, 𝑆3, ..., 𝑆𝑛)
+
+Returns 𝑆1, 𝑆2, ..., 𝑆𝑛 joined together as a single string.
+
+## strcmp(𝑆1,𝑆2)
+
+Returns `true` if 𝑆1 comes before 𝑆2 alphabetically, `false` otherwise.
+
+## subseq(𝑆1,𝑆2)
+
+Returns true if 𝑆1 is a subsequence of 𝑆2, false otherwise:
+
+```javascript
+import { subseq } from "@str";
+
+const res = subseq("hello", "hello world");
+console.log(res);
+```
+
+```terminal
+true
+```
+
+## Caveats
+
+To instantiate strings, JavaScript uses 16 bits (2 bytes) per character.
+This yields a total of ${2^{16}}$ (${65~536}$) possible characters. The
+problem: Unicode defines more characters than ${2^16}$ (the latest standard
+version defines ${144~697}$) To solve this problem, JavaScript encodes
+strings with UTF-16.[^1]
+
+Under UTF-16, JavaScript maintains every character taking up 2 bytes. In
+UTF-speak, the block of 2 bytes is called a _code unit_, and the
+character's _code point_ is in this block. A code point is just another
+word for _character code_ (as well as _code number_, _code value_, _code
+element_, etc.). It's a one-to-one mapping between a character and a
+natural number.
+
+For example, in ASCII, `Z` maps to the natural number 90. This is a simple
+mapping method: Each character is mapped to a natural number in the range 0
+to 255.
+
+```javascript
+Print("Z".codePointAt(0)); // 90 - inline with ASCII
+Print("a".codePointAt(0)); // 97 - inline with ASCII
+Print("め".codePointAt(0)); // 12417 - out of ASCII range
+```
+
+In Unicode, the code points are often represented with `U+` prepended, and
+instead a integer numbers (as outputted by JavaScript) hexadecimals are
+used instead:
+
+```javascript
+Print("a".codePointAt(0).toString(16)); // 61
+Print("Z".codePointAt(0).toString(16)); // 5a
+Print("め".codePointAt(0).toString(16)); // 3081
+```
+
+We can confirm this to be the case when we use the `\u` syntax and the
+hexadecimal numbers in a string:
+
+```javascript
+Print("a".codePointAt(0).toString(16)); // U+0061
+Print("Z".codePointAt(0).toString(16)); // U+005a
+Print("め".codePointAt(0).toString(16)); // U+3081
+
+Print("\u0061"); // a
+Print("\u005a"); // Z
+Print("\u3081"); // め
+```
+
+As we can likely tell, these are large numbers. Unicode originally planned
+to only use 16-bit numbers (hence Java's `char` type consisting of 16
+bits), but Unicode's code points today run from `0x0000` (0) to `0x10FFFF`
+(1~114~111). With just 16 bits, only the code points from `0x0000` to
+`0xFFFF` would be covered.
+
+[^1] Importantly, Unicode is just a set of mappings from integers to
+characters. It is _not_ a character encoding scheme (i.e., Unicode doesn't
+dictate how the mappings are implemented). Instead, Unicode says, "This is
+the set, go forth and implement." Unicode's audience (the actual encoding
+schemes), include UCS-2, UCS-4, UTF-2, UTF-4, UTF-8 UTF-16 (what JavaScript
+uses), and UTF-32.

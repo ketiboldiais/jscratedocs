@@ -1,0 +1,76 @@
+---
+sidebar_label: "Weighted Graph"
+---
+
+The `WeightedGraph` module implements a weighted _simple graph_. That is, a
+a simple graph with weighted edges.
+
+## Constructor
+
+A `WeightedGraph` can be instantiated by passing a comma separated list of
+edges (or a spread of an array of edges). Alternatively, the parameter list
+can be left empty, with edges and vertices added later via the `addEdge`
+and `addVertices` methods.
+
+```javascript
+import { WeightedGraph } from "@crates";
+import { Print } from "@util";
+
+const wg = WeightedGraph(["A", "B", 4], ["A", "C", 2], ["B", "D", 3]);
+
+Print(wg);
+```
+
+```terminal
+├─ A
+│  ├─ 0
+│  │  ├─ node: B
+│  │  └─ weight: 4
+│  └─ 1
+│     ├─ node: C
+│     └─ weight: 2
+├─ B
+│  ├─ 0
+│  │  ├─ node: A
+│  │  └─ weight: 4
+│  └─ 1
+│     ├─ node: D
+│     └─ weight: 3
+├─ C
+│  └─ 0
+│     ├─ node: A
+│     └─ weight: 2
+└─ D
+   └─ 0
+      ├─ node: B
+      └─ weight: 3
+```
+
+## shortestPath(𝑆, 𝐸)
+
+Returns an array listing the shortest path from 𝑆 to 𝐸, using Dijkstra's
+algorithm.
+
+```javascript
+import { WeightedGraph } from "@crates";
+import { Print } from "@util";
+
+const wg = WeightedGraph(
+	["A", "B", 4],
+	["A", "C", 2],
+	["B", "E", 3],
+	["C", "D", 2],
+	["C", "F", 4],
+	["D", "E", 3],
+	["D", "F", 1],
+	["E", "F", 1],
+);
+
+const shortestPath_A_to_E = wg.shortestPath("A", "E");
+
+Print(shortestPath_A_to_E);
+```
+
+```terminal
+[A, C, D, F, E]
+```

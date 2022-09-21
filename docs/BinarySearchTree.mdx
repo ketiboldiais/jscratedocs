@@ -1,0 +1,276 @@
+---
+sidebar_label: "Binary Search Tree"
+---
+
+# BinarySearchTree
+
+The `BinarySearchTree` module implements a binary search tree.
+
+## Constructor
+
+To construct a new `BinarySearchTree`:
+
+```javascript
+import { binarySearchTree } from "@crates";
+import { Print } from "@util";
+
+const bst = binarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13);
+Print(bst);
+```
+
+```terminal
+└─ root
+   ├─ value: 8
+   ├─ left
+   │  ├─ value: 3
+   │  ├─ left
+   │  │  ├─ value: 1
+   │  │  ├─ left: null
+   │  │  └─ right: null
+   │  └─ right
+   │     ├─ value: 6
+   │     ├─ left
+   │     │  ├─ value: 4
+   │     │  ├─ left: null
+   │     │  └─ right: null
+   │     └─ right
+   │        ├─ value: 7
+   │        ├─ left: null
+   │        └─ right: null
+   └─ right
+      ├─ value: 10
+      ├─ left: null
+      └─ right
+         ├─ value: 14
+         ├─ left
+         │  ├─ value: 13
+         │  ├─ left: null
+         │  └─ right: null
+         └─ right: null
+```
+
+## 𝐵.arrayed(𝑆:string)
+
+- Returns an array of 𝐵's values in the specified order 𝑆. Valid 𝑆 values:
+  - `"pre"` - yields the array from a preorder traversal
+  - `"in"` - yields the array from an inorder traversal
+  - `"post"` - yields the array from a postorder traversal
+  - `"level"` - yields the array from a level-order traveral
+  - `undefined` - default to `"in"`
+
+```javascript
+import { binarySearchTree } from "@crates";
+
+const bst = binarySearchTree(7, 4, 12, 2, 6, 9, 19, 3, 5, 8, 11, 15, 20);
+
+const preorder = bst.arrayed("pre");
+const inorder = bst.arrayed("in");
+const postorder = bst.arrayed("post");
+const levelorder = bst.arrayed("level");
+const defaultOrder = bst.arrayed();
+
+console.log(`preorder: ${preorder}`);
+console.log(`inorder: ${inorder}`);
+console.log(`postorder: ${postorder}`);
+console.log(`levelorder: ${levelorder}`);
+console.log(`defaultOrder: ${defaultOrder}`);
+```
+
+```terminal
+preorder: 7,4,2,3,6,5,12,9,8,11,19,15,20
+inorder: 2,3,4,5,6,7,8,9,11,12,15,19,20
+postorder: 3,2,5,6,4,8,11,9,15,20,19,12,7
+levelorder: 7,4,12,2,6,9,19,3,5,8,11,15,20
+```
+
+## 𝐵.push(𝑣)
+
+- The `push()` method inserts a new node with the value 𝑣 into the tree.
+
+```javascript
+import { binarySearchTree } from "@crates";
+
+const bst = binarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13);
+bst.push(17);
+```
+
+## 𝐵.delete(𝑣)
+
+- Deletes the node containing the value 𝑣, and returns `this`.
+
+```javascript
+import { binarySearchTree } from "@crates";
+
+const bst = binarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13);
+bst.print();
+bst.delete(8);
+```
+
+## 𝐵.size()
+
+- The number of nodes in the binary search tree.
+
+```javascript
+import { binarySearchTree } from "@crates";
+
+const bst = binarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13);
+const size = bst.size();
+console.log(size);
+```
+
+```terminal
+9
+```
+
+## 𝐵.isStrict()
+
+- Returns false if at least one node in the tree has exactly one child,
+  true otherwise.
+
+```javascript
+import { binarySearchTree } from "@crates";
+
+const bst = binarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13);
+const isStrict = bst.isStrict();
+console.log(isStrict);
+```
+
+```terminal
+false
+```
+
+## 𝐵.leafCount()
+
+- Returns the number of leaves in the tree.
+
+```javascript
+import { binarySearchTree } from "@crates";
+
+const bst = binarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13);
+const leafCount = bst.leafCount();
+console.log(leafCount);
+```
+
+```terminal
+4
+```
+
+## 𝐵.deg2Count()
+
+- Returns the number of nodes in the tree with exactly two children.
+
+```javascript
+import { binarySearchTree } from "@crates";
+
+const bst = binarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13);
+const deg2s = bst.deg2Count();
+console.log(deg2s);
+```
+
+```terminal
+3
+```
+
+## 𝐵.deg1Count()
+
+- Returns the number of nodes in the tree with exactly one child.
+
+```javascript
+import { binarySearchTree } from "@crates";
+
+const bst = binarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13);
+const deg1Count = bst.deg1Count();
+console.log(deg1Count);
+```
+
+```terminal
+2
+```
+
+## 𝐵.height()
+
+- Returns the height of 𝐵.
+- The result is computed with recursion. If this value is extensively used,
+  it's a good idea to store the result in a variable for caching.
+
+```javascript
+import { binarySearchTree } from "@crates";
+
+const bst = binarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13);
+const bstHeight = bst.height();
+console.log(bstHeight);
+```
+
+```terminal
+4
+```
+
+## 𝐵.maxDepth()
+
+- Returns the length of the longest path from the root node to the farthest
+  leaf node of 𝐵.
+- Like the `𝐵.height()` method, the `maxDepth()` is computed with
+  recursion. For efficient caching, store the result in a variable.
+
+```javascript
+import { binarySearchTree } from "@crates";
+
+const bst = binarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13);
+const maxDepth = bst.maxDepth();
+console.log(maxDepth);
+```
+
+```terminal
+4
+```
+
+## 𝐵.minDepth()
+
+- Returns the length of the shortest path from the root node to the
+  farthest leaf.
+
+```javascript
+import { binarySearchTree } from "@crates";
+
+const bst = binarySearchTree(8, 3, 10, 1, 6, 14, 4, 7, 13);
+const minDepth = bst.minDepth();
+console.log(minDepth);
+```
+
+```terminal
+2
+```
+
+## Details
+
+Binary search trees are a connected data structure, consisting of a set of
+nodes, where each node holds (1) data, (2) a pointer to a binary tree 𝑎
+(often called the left child), and (3) a pointer to a binary tree 𝑏 (often
+called the right child). All of the tree's nodes originate from a single
+node, called the _root_. As such, binary trees are a kind of ascyclic
+graph.
+
+The binary search algorithm provides an efficient way to search _sorted_
+arrays, but that efficiency is limited to searching. Arrays, sorted or
+otherwise, still suffer from expensive add and delete operations. Binary
+search trees provide a way around these problems.
+
+### Use Cases
+
+- Storing names and looking up a named based on a prefix of the name (used
+  in internet routers).
+- Storing a graph's paths and reversing subsections of the path in
+  ${O(\lg n).}$ This leads to significant savings in solving travelling
+  salesman problems.
+- Determining the rank of a node in a given set.
+- Splitting a data set along a boundary (e.g., given a boundary ${x,}$
+  separating the data into those less than ${x}$ and those greater than
+  ${x}$). Binary search trees accomplish this in ${O(\lg n).}$
+
+### Caveats
+
+- Searching is ${O(\lg n)}$ at best. At worst, ${O(n).}$ This is because
+  the running time depends on the length of a path. If the binary search
+  tree is skewed (a straight path from root to leaf), the binary search
+  tree degenerates into a linked list, and searching is ${O(n).}$
+  ${O(\lg n)}$ occurs only if the tree is perfectly balanced.

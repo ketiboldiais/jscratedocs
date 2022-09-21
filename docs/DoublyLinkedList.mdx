@@ -1,0 +1,160 @@
+---
+sidebar_label: "Doubly-linked Lists"
+---
+
+# DList
+
+The `DList` container implements a doubly-linked list.
+
+## Constructor
+
+To instantiate a `DList`, call the `DList` function. A comma-separated list
+of values can be passed to instantiate the list immediately:
+
+```javascript
+import { DList } from "@crates";
+import { Print } from "@util";
+
+const list = DList(1, 2, 3, 4, 5);
+
+Print(list);
+```
+
+```terminal
+<--[1]==[2]==[3]==[4]==[5]--> null
+```
+
+## 𝐿.push(𝑣)
+
+Inserts the value 𝑣 at the end of list 𝐿.
+
+```javascript
+import { DList } from "@crates";
+import { Print } from "@util";
+
+const list = DList(1, 2, 3, 4, 5);
+
+Print(list);
+
+list.push(6);
+
+Print(list);
+```
+
+```terminal
+<--[1]==[2]==[3]==[4]==[5]--> null
+
+<--[1]==[2]==[3]==[4]==[5]==[6]--> null
+```
+
+## 𝐿.pop()
+
+Removes and returns the last element of the list 𝐿.
+
+```javascript
+import { DList } from "@crates";
+import { Print } from "@util";
+
+const list = DList(1, 2, 3, 4, 5);
+
+Print(list);
+
+list.pop();
+
+Print(list);
+```
+
+```terminal
+<--[1]==[2]==[3]==[4]==[5]--> null
+
+<--[1]==[2]==[3]==[4]--> null
+```
+
+## 𝐿.lop()
+
+Removes, and returns, the first element of the list 𝐿.
+
+```javascript
+import { DList } from "@crates";
+import { Print } from "@util";
+
+const list = DList(1, 2, 3, 4, 5);
+
+Print(list);
+
+const removed = list.lop();
+
+Print(list);
+
+Print(removed);
+```
+
+```terminal
+<--[1]==[2]==[3]==[4]==[5]--> null
+
+<--[2]==[3]==[4]==[5]--> null
+
+1
+```
+
+## 𝐿.prefix(𝑣)
+
+Inserts the element 𝑣 at the head of the list 𝐿.
+
+```javascript
+import { DList } from "@crates";
+import { Print } from "@util";
+
+const list = DList(1, 2, 3, 4, 5);
+
+Print(list);
+
+list.prefix(0);
+
+Print(list);
+```
+
+```terminal
+<--[1]==[2]==[3]==[4]==[5]--> null
+
+<--[0]==[1]==[2]==[3]==[4]==[5]--> null
+```
+
+## 𝐿.get(𝑖)
+
+Returns the element at index 𝑖.
+
+```javascript
+import { DList } from "@crates";
+import { Print } from "@util";
+
+const list = DList(1, 2, 3, 4, 5);
+
+const x = list.get(3);
+
+Print(x);
+```
+
+```terminal
+4
+```
+
+Note that out of bound indices are corrected to 𝑖 modulo 𝐿, where 𝐿 is the
+length of the list:
+
+```javascript
+import { DList } from "@crates";
+import { Print } from "@util";
+
+const list = DList(1, 2, 3, 4, 5);
+
+Print(list);
+
+const x = list.get(-1);
+
+Print(x);
+```
+
+```terminal
+5
+```

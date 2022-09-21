@@ -1,0 +1,154 @@
+---
+sidebar_label: "Sort API"
+sidebar_position: 3
+---
+
+# Sort
+
+The `sort` module provides several sorting algorithms. The sorters operate
+on native JavaScript arrays consisting of either (1) numbers, (2) strings,
+or (3) an array of objects. If an array of objects is passed, a callback
+function specifying what keys to compare must be specified.
+
+**NOTE:** For the sort methods below with a parameter `𝑂?`, `𝑂?` signifies
+an optional string parameter that sets the sort order. Valid `𝑂` values
+are:
+
+- `"<"`
+  - If the array consists of numbers, the elements are sorted in descending
+    order (greatest to least).
+  - If the array consists of strings, the elements are sorted in
+    zetabetical (reverse alphabetical) order.
+- `">"`
+  - This is the default value.
+  - If the array consists of numbers, the elements are sorted in ascending
+    order (from least to greatest).
+  - If the array is consists of strings, the elements are sorted in
+    alphabetical order.
+- `(a: any, b: any) => boolean`
+
+  - A callback function that takes array elements `a` and `b`, and returns
+    a Boolean (a comparison of `a` and `b`).
+  - This argument must be provided if the array consists of objects.
+  - For example, in the snippet below, an array of objects containing a
+    student field and an age field are to be sorted. For both calls, a
+    function is passed as the order parameter. In the first call, the
+    student field value are compared with the `strcmp()` function (this
+    function compares strings alphabetically; see the String API section).
+    In the second call, the objects are sorted by name:
+
+    ```javascript
+    import { insertion } from "@sort";
+    import { strcmp } from "@str";
+
+    const students = [
+    	{ student: "Louise", age: 23 },
+    	{ student: "Ragnar", age: 21 },
+    	{ student: "Kaito", age: 22 },
+    ];
+
+    insertion(students, (a, b) => strcmp(a.student, b.student));
+    console.log(students);
+
+    insertion(students, (a, b) => a.age > b.age);
+    console.log(students);
+    ```
+
+    ```terminal
+    [ { student: 'Kaito', age: 22 }, // sorted objects by student field
+    	{ student: 'Louise', age: 23 },
+    	{ student: 'Ragnar', age: 21 } ]
+
+    [ { student: 'Ragnar', age: 21 }, // sorted objects by age field
+    	{ student: 'Kaito', age: 22 },
+    	{ student: 'Louise', age: 23 } ]
+    ```
+
+## bubble(𝐴,𝑂?)
+
+Given the array 𝐴, returns the array sorted with the bubble sort.
+
+```javascript
+import { bubble } from "@sort";
+
+const names = ["amy", "connor", "daniel", "boram"];
+const nums = [1, 3, 4, 5];
+
+bubble(names);
+bubble(nums);
+
+console.log(names);
+console.log(nums);
+```
+
+```terminal
+[ 'amy', 'boram', 'connor', 'daniel' ]
+[ 1, 3, 4, 5 ]
+```
+
+## selection(𝐴,𝑂?)
+
+Returns array 𝐴 sorted with selection sort.
+
+```javascript
+import { selection } from "@sort";
+
+const names = ["amy", "connor", "daniel", "boram"];
+const nums = [1, 3, 4, 5];
+
+selection(names);
+selection(nums);
+
+console.log(names);
+console.log(nums);
+```
+
+```terminal
+[ 'amy', 'boram', 'connor', 'daniel' ]
+[ 1, 3, 4, 5 ]
+```
+
+## insertion(𝐴,𝑂?)
+
+Returns array 𝐴 sorted with insertion sort.
+
+```javascript
+import { insertion } from "@sort";
+
+const fruits = ["kiwis", "apples", "mangoes", "berries"];
+const nums = [17, 5, 9, 8, 5];
+
+insertion(fruits);
+insertion(nums);
+
+console.log(fruits);
+console.log(nums);
+```
+
+```terminal
+[ 'apples', 'berries', 'kiwis', 'mangoes' ]
+[ 5, 5, 8, 9, 17 ]
+```
+
+## mergeSort(𝐴,𝑂?)
+
+Returns a _new_ array 𝐴 with the elements sorted via merge sort.
+
+```javascript
+import { mergeSort } from "@sort";
+
+const stock = [
+	{ fruit: "rice", quantity: 113 },
+	{ fruit: "potatoes", quantity: 128 },
+	{ fruit: "bread", quantity: 137 },
+];
+
+const sortedStock = mergeSort(stock, (a, b) => a.quantity > b.quantity);
+console.log(sortedStock);
+```
+
+```terminal
+[ { fruit: 'rice', quantity: 113 },
+  { fruit: 'potatoes', quantity: 128 },
+  { fruit: 'bread', quantity: 137 } ]
+```

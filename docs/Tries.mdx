@@ -1,0 +1,324 @@
+# Trie
+
+The `Trie` module implements a basic trie. Because tries consume
+significant amounts of memory, the `Trie` module will only work with the
+ASCII characters listed in the Alphabet dropwdown below (lower-case English
+letters "a" through "z"). Uppercase letters are treated as lower-case
+letters through a simple or-shortcircuit that checks for
+`toLocaleLowerCase()`. If uppercase letters should be treated as unique
+glyphs, see the next paragraph.
+
+<details>
+	<summary>Alphabet</summary>
+	<table>
+		<thead>
+			<tr>
+				<th>Dec</th>
+				<th>Hx</th>
+				<th>Oct</th>
+				<th>Html</th>
+				<th>Char</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>97</td>
+				<td>61</td>
+				<td>141</td>
+				<td>&amp;#97;</td>
+				<td>a</td>
+			</tr>
+			<tr>
+				<td>98</td>
+				<td>62</td>
+				<td>142</td>
+				<td>&amp;#98;</td>
+				<td>b</td>
+			</tr>
+			<tr>
+				<td>99</td>
+				<td>63</td>
+				<td>143</td>
+				<td>&amp;#99;</td>
+				<td>c</td>
+			</tr>
+			<tr>
+				<td>100</td>
+				<td>64</td>
+				<td>144</td>
+				<td>&amp;#100;</td>
+				<td>d</td>
+			</tr>
+			<tr>
+				<td>101</td>
+				<td>65</td>
+				<td>145</td>
+				<td>&amp;#101;</td>
+				<td>e</td>
+			</tr>
+			<tr>
+				<td>102</td>
+				<td>66</td>
+				<td>146</td>
+				<td>&amp;#102;</td>
+				<td>f</td>
+			</tr>
+			<tr>
+				<td>103</td>
+				<td>67</td>
+				<td>147</td>
+				<td>&amp;#103;</td>
+				<td>g</td>
+			</tr>
+			<tr>
+				<td>104</td>
+				<td>68</td>
+				<td>150</td>
+				<td>&amp;#104;</td>
+				<td>h</td>
+			</tr>
+			<tr>
+				<td>105</td>
+				<td>69</td>
+				<td>151</td>
+				<td>&amp;#105;</td>
+				<td>i</td>
+			</tr>
+			<tr>
+				<td>106</td>
+				<td>6A</td>
+				<td>152</td>
+				<td>&amp;#106;</td>
+				<td>j</td>
+			</tr>
+			<tr>
+				<td>107</td>
+				<td>6B</td>
+				<td>153</td>
+				<td>&amp;#107;</td>
+				<td>k</td>
+			</tr>
+			<tr>
+				<td>108</td>
+				<td>6C</td>
+				<td>154</td>
+				<td>&amp;#108;</td>
+				<td>l</td>
+			</tr>
+			<tr>
+				<td>109</td>
+				<td>6D</td>
+				<td>155</td>
+				<td>&amp;#109;</td>
+				<td>m</td>
+			</tr>
+			<tr>
+				<td>110</td>
+				<td>6E</td>
+				<td>156</td>
+				<td>&amp;#110;</td>
+				<td>n</td>
+			</tr>
+			<tr>
+				<td>111</td>
+				<td>6F</td>
+				<td>157</td>
+				<td>&amp;#111;</td>
+				<td>o</td>
+			</tr>
+			<tr>
+				<td>112</td>
+				<td>70</td>
+				<td>160</td>
+				<td>&amp;#112;</td>
+				<td>p</td>
+			</tr>
+			<tr>
+				<td>113</td>
+				<td>71</td>
+				<td>161</td>
+				<td>&amp;#113;</td>
+				<td>q</td>
+			</tr>
+			<tr>
+				<td>114</td>
+				<td>72</td>
+				<td>162</td>
+				<td>&amp;#114;</td>
+				<td>r</td>
+			</tr>
+			<tr>
+				<td>115</td>
+				<td>73</td>
+				<td>163</td>
+				<td>&amp;#115;</td>
+				<td>s</td>
+			</tr>
+			<tr>
+				<td>116</td>
+				<td>74</td>
+				<td>164</td>
+				<td>&amp;#116;</td>
+				<td>t</td>
+			</tr>
+			<tr>
+				<td>117</td>
+				<td>75</td>
+				<td>165</td>
+				<td>&amp;#117;</td>
+				<td>u</td>
+			</tr>
+			<tr>
+				<td>118</td>
+				<td>76</td>
+				<td>166</td>
+				<td>&amp;#118;</td>
+				<td>v</td>
+			</tr>
+			<tr>
+				<td>119</td>
+				<td>77</td>
+				<td>167</td>
+				<td>&amp;#119;</td>
+				<td>w</td>
+			</tr>
+			<tr>
+				<td>120</td>
+				<td>78</td>
+				<td>170</td>
+				<td>&amp;#120;</td>
+				<td>x</td>
+			</tr>
+			<tr>
+				<td>121</td>
+				<td>79</td>
+				<td>171</td>
+				<td>&amp;#121;</td>
+				<td>y</td>
+			</tr>
+			<tr>
+				<td>122</td>
+				<td>7A</td>
+				<td>172</td>
+				<td>&amp;#122;</td>
+				<td>z</td>
+			</tr>
+		</tbody>
+	</table>
+</details>
+
+To include more glyphs in the alphabet, see the `addGlyph` and `addGlyphs`
+methods below. Note, however, that tries achieve their time efficiency by
+consuming large amounts of memory. With the default alphabet, each node in
+the trie holds an array of length **26**. Extended ASCII support (including
+all the control characters rarely used today) implies that each node stores
+an array of **256**. In turn, this implies that, given an alphabet of 256
+characters, a simple three letter word like "eat" results in three arrays
+of size 256.
+
+## Constructor
+
+A `Trie` can be instantiated by passing an optional comma separated list of
+string values to the `Trie()` function:
+
+```javascript
+import { Trie } from "@crates";
+import { Print } from "@util";
+
+const trie = Trie("Anne", "Zoe", "Cathy", "Hikari");
+Print(trie);
+```
+
+```terminal
+word: Anne
+word: Cathy
+word: Hikari
+word: Zoe
+```
+
+## insert(𝑆)
+
+Inserts the string 𝑆 into the trie:
+
+```javascript
+import { Trie } from "@crates";
+import { Print } from "@util";
+
+const trie = Trie("Anne", "Zoe", "Cathy", "Hikari");
+
+Print(trie);
+
+trie.insert("Boram");
+
+Print(trie);
+```
+
+```terminal
+word: Anne
+word: Cathy
+word: Hikari
+word: Zoe
+
+word: Anne
+word: Boram
+word: Cathy
+word: Hikari
+word: Zoe
+```
+
+## delete(𝑆)
+
+Deletes the string 𝑆 in the trie:
+
+```javascript
+import { Trie } from "@crates";
+import { Print } from "@util";
+
+const trie = Trie("Billy", "Joe", "Cathy", "Hikari");
+
+Print(trie);
+
+trie.delete("Hikari");
+
+Print(trie);
+```
+
+```terminal
+word: Billy
+word: Cathy
+word: Hikari
+word: Joe
+
+word: Billy
+word: Cathy
+word: Joe
+```
+
+## has(𝑆)
+
+Returns `true` if the trie contains the string 𝑆, `false` otherwise.
+
+```javascript
+import { Trie } from "@crates";
+import { Print } from "@util";
+
+const trie = Trie("Anne", "Zoe", "Cathy", "Hikari");
+
+const JoeVoted = trie.has("Joe");
+const ZoeVoted = trie.has("Zoe");
+const AnnVoted = trie.has("Ann");
+
+Print(JoeVoted);
+Print(ZoeVoted);
+Print(AnnVoted);
+```
+
+```terminal
+false
+true
+false
+```
+
+Note that the `has()` method returns the result of a search for the exact
+match of 𝑆. As such, the last query (`"Ann"`), returns false because there
+is no word that exactly matches `"Ann"`.

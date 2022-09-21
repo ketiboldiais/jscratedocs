@@ -1,0 +1,147 @@
+---
+sidebar_label: "Priority Queue"
+---
+
+# PriorityQueue
+
+The `PriorityQueue` module implements a basic priority queue, a special
+kind of queue. As a _priority_ queue, each of the queue's elements are
+assumed to have a specific priority (from a finite set of possible
+priorities), and elements with higher priorities are processed before those
+with lower priorities. And as a _queue_, the elements are processed under
+_FIFO_ — first in, first out. This is analogous to a queue of passengers
+boarding a flight: Boarding Group 1, Group 2, Group 3, etc.
+
+**NOTE**: The `PriorityQueue` class only uses numbers to interpret priority
+levels, with smaller numbers signaling higher prority, and larger numbers
+signaling lower priority.
+
+## Constructor
+
+A new priority can be created as follows:
+
+```javascript
+const h = PriorityQueue(
+	["Sally", 1],
+	["Yuna", 0],
+	["Jenny", 2],
+	["Abraham", 4],
+	["Kento", 9],
+);
+h.print();
+```
+
+```terminal
+[ (Yuna,0) (Sally,1) (Jenny,2) (Abraham,4) (Kento,9) ]
+```
+
+The `PriorityQueue()` constructor takes a comma separated list of 2-element
+arrays of the form:
+
+$$
+	\texttt{[𝑣, 𝑝]}
+$$
+
+where 𝑣 is the data value, and 𝑝 is the priority.
+
+## `𝑄.enqueue(𝑣,𝑝)`
+
+- Inserts a new queuer with the value `𝑣` and the priority `𝑝` into the
+  queue.
+
+```javascript
+const h = PriorityQueue(
+	["Sally", 1],
+	["Yuna", 4],
+	["Jenny", 5],
+	["Abraham", 3],
+	["Kento", 2],
+	["Jamie", 5],
+);
+h.print();
+h.enqueue("Kyle", 6);
+h.print();
+```
+
+```terminal
+[ (Sally,1) (Kento,2) (Jamie,5) (Yuna,4) (Abraham,3) (Jenny,5) ]
+[ (Sally,1) (Kento,2) (Jamie,5) (Yuna,4) (Abraham,3) (Jenny,5) (Kyle,6) ]
+```
+
+## `𝑄.dequeue()`
+
+- Removes the queuer currently at the front of the queue, and returns the
+  queuer.
+
+```javascript
+const h = PriorityQueue(
+	["Sally", 1],
+	["Yuna", 4],
+	["Jenny", 5],
+	["Abraham", 3],
+	["Kento", 2],
+	["Jamie", 5],
+);
+h.print();
+
+const d = h.dequeue();
+
+h.print();
+Print(d);
+```
+
+```terminal
+[ (Sally,1) (Kento,2) (Jamie,5) (Yuna,4) (Abraham,3) (Jenny,5) ]
+[ (Kento,2) (Abraham,3) (Jamie,5) (Yuna,4) (Jenny,5) ]
+{value: Sally, priority: 1}
+```
+
+## `𝑄.front()`
+
+- Returns the current queuer with the highest priority (i.e., the queuer
+  that, if `dequeque()` is called, would be returned).
+
+```javascript
+const h = PriorityQueue(
+	["Sally", 1],
+	["Yuna", 4],
+	["Jenny", 5],
+	["Abraham", 3],
+	["Kento", 2],
+	["Jamie", 5],
+);
+const currentFront = h.front();
+Print(currentFront);
+```
+
+```terminal
+{value: Sally, priority: 1}
+```
+
+## `𝑄.rear()`
+
+- Returns the queuer with the lowest priority (i.e., the queuer that would
+  be dequequed last).
+
+```javascript
+const h = PriorityQueue(
+	["Sally", 1],
+	["Yuna", 4],
+	["Jenny", 5],
+	["Abraham", 3],
+	["Kento", 2],
+	["Jamie", 5],
+);
+h.print();
+const currentRear = h.rear();
+Print(currentRear);
+```
+
+```terminal
+[ (Sally,1) (Kento,2) (Jenny,5) (Yuna,4) (Abraham,3) (Jamie,5) ]
+{value: Jamie, priority: 5}
+```
+
+## `𝑄.isEmpty()`
+
+Returns `true` if the priority queue is empty, `false` otherwise.

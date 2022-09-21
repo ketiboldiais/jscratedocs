@@ -1,0 +1,208 @@
+---
+sidebar_label: "Graph"
+---
+
+# Graph
+
+jsCrate contains several graph ADTs. This page documents the most basic
+implementation — `Graph`, which implements a simple graph. Compared to
+other modules:
+
+| Module         | Edges                   | Multiple Edges Allowed? | Loops Allowed? |
+| -------------- | ----------------------- | ----------------------- | -------------- |
+| `Graph`        | Undirected              | No                      | No             |
+| `Multigraph`   | Undirected              | Yes                     | No             |
+| `Pseudograph`  | Undirected              | Yes                     | Yes            |
+| `Digraph`      | Directed                | No                      | No             |
+| `Dimultigraph` | Directed                | Yes                     | Yes            |
+| `MixedGraph`   | Directed and Undirected | Yes                     | Yes            |
+
+## adjacent(𝑣, 𝑤)
+
+Returns `true` if vertices 𝑣 and 𝑤 are adjacent (i.e., have an edge
+connecting them), `false` otherwise.
+
+```javascript
+import { Graph } from "@crates";
+import { Print } from "@util";
+
+const g = Graph(
+	["Tokyo", "London"],
+	["New York", "London"],
+	["Paris", "London"],
+	["New Dehli", "Moscow"],
+	["New Dehli", "New York"],
+);
+Print(g.adjacent("Tokyo", "New York"));
+Print(g.adjacent("New Dehli", "Moscow"));
+```
+
+```terminal
+false
+true
+```
+
+## independent(𝑣, 𝑤)
+
+Returns `true` if 𝑣 and 𝑤 are independent (i.e., no edge connects them),
+`false` otherwise.
+
+```javascript
+import { Graph } from "@crates";
+import { Print } from "@util";
+
+const g = Graph(
+	["Tokyo", "London"],
+	["New York", "London"],
+	["Paris", "London"],
+	["New Dehli", "Moscow"],
+	["New Dehli", "New York"],
+);
+Print(g.independent("London", "Moscow"));
+Print(g.independent("New York", "London"));
+```
+
+```terminal
+true
+false
+```
+
+## isolated(𝑣)
+
+Returns `true` if 𝑣 is not connected to any other vertex, `false`
+otherwise.
+
+```javascript
+import { Graph } from "@crates";
+import { Print } from "@util";
+
+const g = Graph(
+	["Tokyo", "London"],
+	["New York", "London"],
+	["Paris", "London"],
+	["New Dehli", "Moscow"],
+	["New Dehli", "New York"],
+	"Pyongyang",
+);
+Print(g.isolated("London"));
+Print(g.isolated("Pyongyang"));
+```
+
+```terminal
+true
+false
+```
+
+## complete()
+
+Returns `true` if the graph is complete, `false` otherwise. A graph is
+complete if every pair of unique vertices is connected by an edge.
+
+```javascript
+import { Graph } from "@crates";
+import { Print } from "@util";
+
+const g = Graph(
+	["LA", "Chicago"],
+	["Atlanta", "Chicago"],
+	["LA", "Atlanta"],
+);
+
+const gIsComplete = g.complete();
+
+Print(gIsComplete);
+```
+
+```terminal
+true
+```
+
+## degree(𝑣)
+
+Returns the degree of the vertex 𝑣 (i.e., the number of edges incident to
+𝑣).
+
+```javascript
+import { Graph } from "@crates";
+import { Print } from "@util";
+
+const g = Graph(
+	["Tokyo", "London"],
+	["New York", "London"],
+	["Paris", "London"],
+	["New Dehli", "Moscow"],
+	["New Dehli", "New York"],
+);
+Print(g.degree("New Dehli"));
+```
+
+```terminal
+2
+```
+
+## neighborhood(𝑣)
+
+Returns the neighborhood of 𝑣 (the set of all nodes directly connected to
+𝑣).
+
+```javascript
+import { Graph } from "@crates";
+import { Print } from "@util";
+
+const g = Graph(
+	["Tokyo", "London"],
+	["New York", "London"],
+	["Paris", "London"],
+	["New Dehli", "Moscow"],
+	["New Dehli", "New York"],
+);
+Print(g.neighborhood("New York"));
+```
+
+```terminal
+[London, New Dehli]
+```
+
+## edgeCount()
+
+Returns the number of edges in the graph.
+
+```javascript
+import { Graph } from "@crates";
+import { Print } from "@util";
+
+const g = Graph(
+	["Tokyo", "London"],
+	["New York", "London"],
+	["Paris", "London"],
+	["New Dehli", "Moscow"],
+	["New Dehli", "New York"],
+);
+Print(g.edgeCount());
+```
+
+```terminal
+5
+```
+
+## vertexCount()
+
+Returns the number of vertices in the graph.
+
+```javascript
+import { Graph } from "@crates";
+import { Print } from "@util";
+
+const g = Graph(
+	["Tokyo", "London"],
+	["New York", "London"],
+	["Paris", "London"],
+	["New Dehli", "Moscow"],
+	["New Dehli", "New York"],
+);
+Print(g.vertexCount());
+```
+
+```terminal
+6
+```

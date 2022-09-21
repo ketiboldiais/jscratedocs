@@ -1,0 +1,36 @@
+## Details
+
+**Union find** is a data structure that tracks elements split into one or
+more disjoint sets. Its two primary functions are `find()` and `union()`.
+The `union()` operation merges two groups together.
+
+For example, say we were running a team of engineers on a project. The
+engineers are identified by the following integers:
+
+```
+1    2    3    4    5
+6    7    8    9    10
+11   12   13   14
+```
+
+Each of these engineers must get together to form subteams, each in charge
+of some aspect of the project. So, we group (`union()`) them as follows:
+
+```
+[1][2][11]
+[3][4][5]
+[6][9]
+[8][10]
+[12][14]
+```
+
+Over time, we see that some subteams have completed their work before the
+others, so we have those subteams join other teams:
+
+```
+[1][2][11]
+[3][4][5][6][9][8][10]
+[12][14]
+```
+
+Union find does all of this very effectively.

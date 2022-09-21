@@ -1,0 +1,790 @@
+---
+sidebar_label: "Math API"
+sidebar_position: 2
+---
+
+# num
+
+The `num` module provides several static methods related to mathematics.
+
+## abs(𝑛)
+
+Returns the absolute value of 𝑛.
+
+$$
+    \texttt{abs(𝑎,𝑏)} \implies \lvert n \rvert
+$$
+
+## ceil(𝑛)
+
+Returns the ceiling of ${n.}$
+
+$$
+    \texttt{divides(𝑎,𝑏)} \implies \lceil n \rceil
+$$
+
+## comod(𝑎, 𝑏, 𝑛)
+
+Returns `true` if 𝑎 and 𝑏 are congruent modulo 𝑛. That is:
+
+$$
+  a \equiv b~(\bmod~m)
+$$
+
+Or, in plain English, ${a-b}$ is a multiple of ${n.}$
+
+```javascript
+import { comod } from "@num";
+import { Print } from "@util";
+
+const a = comod(17, 5, 3);
+const b = comod(184, 51, 19);
+const c = comod(-8, 10, 9);
+const d = comod(20, 6, 3);
+
+Print(a);
+Print(b);
+Print(c);
+Print(d);
+```
+
+```terminal
+true
+true
+true
+false
+```
+
+## base(𝑛, 𝑏, 𝑠?)
+
+Converts 𝑛 to base 𝑏 in the form of a string. An optional size parameter 𝑠
+can be passed to specify the minimum number of digits in the string.
+
+```javascript
+import { base } from "@num";
+import { Print } from "@util";
+
+const binary = base(63, 2);
+const ternary = base(63, 3);
+const quaternary = base(63, 4);
+const octal = base(63, 8);
+const nonary = base(63, 9);
+const decimal = base(63, 10);
+const hex = base(63, 16);
+const vigesimal = base(63, 20);
+
+Print(binary);
+Print(ternary);
+Print(quaternary);
+Print(octal);
+Print(nonary);
+Print(hex);
+Print(vigesimal);
+Print(decimal);
+```
+
+```terminal
+(111111)[2]
+(2100)[3]
+(333)[4]
+(77)[8]
+(70)[9]
+(3F)[16]
+(33)[20]
+(63)[10]
+```
+
+The parameter 𝑛 can be a number or a string. If 𝑛 is a string, it must be
+written in the format above shown by the examples above. Namely:
+
+$$
+    \texttt{(number)[base]}
+$$
+
+Otherwise, any empty string is returned.
+
+```javascript
+import { base } from "@num";
+import { Print } from "@util";
+
+const decimalFromBinary = base("(111111)[2]", 10);
+const binaryFromHex = base("(3F)[16]", 2);
+
+Print(decimalFromBinary);
+Print(binaryFromHex);
+```
+
+```terminal
+63
+(111111)[2]
+```
+
+When a string is passed and the base is specified as `10`, the true number
+value is returned rather than a string.
+
+## divides(𝑎,𝑏)
+
+Returns `true` if 𝑎 divides 𝑏, `false` otherwise. I.e.,
+
+$$
+    \texttt{divides(𝑎,𝑏)} \implies \dfrac{a}{b} \land \texttt{rem}=0
+$$
+
+returns a remainder of 0.
+
+Some helpful rules when using `divides()`:
+
+- 𝑎 and 𝑏 must be integers. An error will be thrown if they aren't.
+- Two parameters is enough. Say 𝑎, 𝑏, and 𝑐 are integers. Then the
+  following are all true:
+
+  1.  If ${a}$ divides ${b}$ and ${a}$ also divides ${c,}$ then ${a,}$
+      divides ${b+c:}$
+  2.  If ${a}$ divides ${b,}$ then ${a}$ divides ${b \cdot c,}$ where ${c}$
+      is an integer.
+  3.  If ${a}$ divides ${b}$ and ${b}$ divides ${c,}$ then ${a}$ divides
+      ${c.}$
+
+## divint(𝑎,𝑏)
+
+Returns the integer division of 𝑎 and 𝑏.
+
+$$
+    \texttt{divint(𝑎,𝑏)} \implies \left\lfloor \dfrac{a}{b} \right\rfloor
+$$
+
+## floor(𝑛)
+
+Returns the floor of ${n.}$
+
+$$
+    \texttt{floor($n$)} \implies \left\lfloor n \right\rfloor
+$$
+
+## integer(𝑛)
+
+Returns `true` if 𝑛 is an integer, `false` otherwise.
+
+$$
+    \texttt{integer(𝑛)} \implies 𝑛 \in \Z
+$$
+
+## isEven(𝑛)
+
+Returns `true` if 𝑛 is even, `false` otherwise.
+
+```javascript
+const a = isEven(4);
+const b = isEven(4.1);
+const c = isEven(-2);
+console.log(`a is even: ${a}`);
+console.log(`b is even: ${b}`);
+console.log(`c is even: ${c}`);
+```
+
+```terminal
+a is even: true
+b is even: false
+c is even: true
+```
+
+## isOdd(𝑛)
+
+Returns `true` if 𝑛 is odd, `false` otherwise.
+
+```javascript
+const a = isOdd(3);
+const b = isOdd(8.9);
+const c = isOdd(-17);
+console.log(`a is odd: ${a}`);
+console.log(`b is odd: ${b}`);
+console.log(`c is odd: ${c}`);
+```
+
+```terminal
+a is odd: true
+b is odd: false
+c is odd: true
+```
+
+## isPrime(𝑛)
+
+Returns `true` if 𝑛 is prime, `false` otherwise.
+
+- Time complexity: ${O(\sqrt{n})}$
+
+## max(𝐴)
+
+Given an array of numbers 𝐴, returns the maximum of 𝐴.
+
+## min(𝐴)
+
+Given an array of numbers 𝐴, returns the minimum of 𝐴.
+
+## natural(𝑛)
+
+Returns `true` if 𝑛 is a natural number (zero or a positive integer),
+`false` otherwise.
+
+$$
+    \texttt{natural(𝑛)} \implies 𝑛 \in \N
+$$
+
+## number(𝑛)
+
+Returns `true` if 𝑛 is a number, `false` otherwise.
+
+## nthFib(𝑛)
+
+Returns the 𝑛th Fibonacci number.
+
+## prec(𝑎,𝑏)
+
+Given 𝑎, and 𝑏, returns the smaller of the two.
+
+```javascript
+import { prec } from "@num";
+
+const smaller = prec(10, 98);
+
+console.log(smaller);
+```
+
+```terminal
+10
+```
+
+## subRule(𝐴,𝐵)
+
+Given an array of any type 𝐴, and an array of any type 𝐵, returns the
+result of applying the subtraction rule from combinatorics.
+
+```javascript
+const event1 = ["Job dies", "Job doesn't die"];
+const event2 = ["Job doesn't die", "Job is punished", "Job is rewarded"];
+Print(subRule(event1, event2));
+```
+
+```terminal
+[
+ Job dies, Job doesn't die,
+ Job is punished, Job is rewarded
+]
+```
+
+The subtraction rule is equivalent to the logical _or_. Say we had two
+events, 𝐴 and 𝐵. If 𝐴 can occur in 𝑛 ways, and 𝐵 can occur in 𝑚 ways, then
+there are ${n+m-1}$ ways for 𝐴 _or_ 𝐵 to occur.
+
+## productRule(𝐴,𝐵)
+
+Given an array of any type 𝐴, and an array of any type 𝐵, returns the
+result of applying the product rule from combinatorics.
+
+```javascript
+const a = ["chicken", "fish", "steak"];
+const b = ["potatoes", "rice", "bread"];
+const result = productRule(a, b);
+Print(result);
+```
+
+```terminal
+[ [ 'chicken', 'potatoes' ],
+  [ 'fish'   , 'potatoes' ],
+  [ 'steak'  , 'potatoes' ],
+  [ 'chicken', 'rice'     ],
+  [ 'fish'   , 'rice'     ],
+  [ 'steak'  , 'rice'     ],
+  [ 'chicken', 'bread'    ],
+  [ 'fish'   , 'bread'    ],
+  [ 'steak'  , 'bread'    ] ]
+```
+
+## primeFactors(𝑛)
+
+Given an natural number 𝑛, returns an array of the prime factors of 𝑛. The
+array consists of tuples of the form:
+
+$$
+    [\texttt{F}, \texttt{E}]
+$$
+
+where ${\texttt{F}}$ is a prime factor, and ${\text{E}}$ is the factor's
+exponent (i.e., how many times the factor occurs in 𝑛's prime
+factorization).
+
+```javascript
+const n = primeFactors(315);
+console.log(n);
+```
+
+```terminal
+[ [ 3, 2 ], [ 5, 1 ], [ 7, 1 ] ]
+```
+
+| metric          | data            |
+| --------------- | --------------- |
+| time complexity | ${O(\sqrt{n})}$ |
+
+The prime factors of a number ${n}$ are the factors ${n}$ that are prime.
+For example, for the number ${315,}$ the prime factors are ${3,5,7.}$ A
+naive approach to finding the prime factors is to iterate from ${i=0}$ to
+${n.}$ If ${i}$ is prime, then we check if it divides ${n.}$ If it does, we
+divide ${n}$ by ${i,}$ and save ${i}$ as a prime factor. We keep ${i}$ at
+that prime until we find that it cannot divide the new ${n.}$ We continue
+doing so until either we've either reduced ${n}$ to ${1,}$ or until we've
+reached ${n:}$
+
+| number | can be divided by prime |
+| ------ | ----------------------- |
+| 100    | 2                       |
+| 50     | 2                       |
+| 25     | 5                       |
+| 5      | 5                       |
+| 1      | end                     |
+
+Once we've reduced the number to 1, we've found the primes:
+
+$$
+    [2,5]
+$$
+
+In pseudocode:
+
+```typescript
+function primeFactors(n: number) {
+	let i = 2;
+	let primes = [];
+	let len = 0; // the current length of the primes
+	let exp = 0; // the exponents for each prime
+	while (n > 1) {
+		let k = 0;
+		while (k % i === 0) {
+			m /= i;
+			k++;
+		}
+		if (k > 0) {
+			len++;
+			primes[len] = i;
+			exp[len] = k;
+		}
+		i++;
+	}
+}
+```
+
+A far better approach is recognizing that we only need to check for
+potential primes up to ${\sqrt{n}.}$ This stems from the fact that a prime
+number ${n}$ takes the form ${n = a \cdot b,}$ where ${n/a}$ yields a
+remainder of zero (assuming ${a}$ is the smaller number; if ${b}$ were the
+smaller, the definition remains: ${n/b}$ yields a remainder of zero). From
+this definition, it must be true that ${a}$ lies on the interval
+${2 \leq a \lt n-a}$ (otherwise ${a}$ woulnd't be a factor). If we suppose
+that ${b = \dfrac{n}{a},}$ then ${a \leq b.}$ And if ${a \leq b,}$ it must
+be true that:
+
+$$
+\begin{aligned}
+    a \cdot b &\geq a^2 \\[1em]
+    n &\geq a^2 \\[1em]
+    \sqrt{n} &\geq a
+\end{aligned}
+$$
+
+Hence, it must be the case that in our code, our variant ${i}$ (the number
+we're checking as a prime factor) must be less than ${\sqrt{n}:}$
+
+```typescript
+function primeFactors(n: number) {
+	let i = 2;
+	let primes = [];
+	let len = 0; // the current length of the primes
+	let exp = 0; // the exponents for each prime
+	while (n > 1 && i * i <= n) {
+		let k = 0;
+		while (i % n === 0) {
+			n /= i;
+			k++;
+		}
+		if (k > 0) {
+			len++;
+			primes[len] = i;
+			exp[len] = k;
+		}
+		d++;
+	}
+}
+```
+
+## primesTo(𝑛)
+
+Returns an array of the primes up to the integer ${n.}$
+
+```javascript
+import { primesTo } from "@num";
+
+const primes = primesTo(100);
+
+console.log(primes);
+```
+
+```terminal
+[ 2, 3, 5, 7, 11,
+  13, 17, 19, 23,
+  29, 31, 37, 41,
+  43, 47, 53, 59,
+  61, 67, 71, 73,
+  79, 83, 89, 97 ]
+```
+
+## rem(𝑎,𝑏)
+
+Returns the remainder of dividing 𝑎 by 𝑏.
+
+## runSum(𝐴)
+
+Given an array of numbers 𝐴, returns the running sum of 𝐴.
+
+```javascript
+const A = [1, 2, 3, 4];
+const result = runSum(A);
+console.log(result);
+```
+
+```terminal
+[1,3,6,10]
+```
+
+## succ(𝑎,𝑏)
+
+Given the numbers 𝑎 and 𝑏, returns the larger of the two.
+
+```javascript
+import { succ } from "@num";
+
+const bigger = succ(1, 2);
+
+console.log(bigger);
+```
+
+```terminal
+2
+```
+
+## sumPivot(𝐴)
+
+Given an array of numbers 𝐴, returns the index ${i}$ of the element ${A_i}$
+where the sum of all elements before ${A_i}$ is equal to the sum of all the
+elements after ${A_i:}$
+
+```javascript
+const data = [1, 7, 3, 6, 5, 6];
+const sumPivotIndex = sumPivot(data);
+console.log(sumPivotIndex);
+```
+
+```terminal
+3
+```
+
+## trunc(𝑛)
+
+Given the number 𝑛, returns the truncation of 𝑛.
+
+## binaryTree
+
+The following methods are scoped to `num`'s `binaryTree` module. They can
+be imported directly from `num`, or, if scoping is preferred:
+
+```terminal
+num.binaryTree.𝑚𝑒𝑡ℎ𝑜𝑑()
+binaryTree.𝑚𝑒𝑡ℎ𝑜𝑑()
+```
+
+**Note**: In the methods below, the height of a binary tree consisting of
+just one node is interpreted as a binary tree of height 0.
+
+### maxHeight(𝑛)
+
+Given the number of nodes 𝑛, returns the height of the _tallest_ possible
+binary tree that can contain 𝑛 nodes.
+
+```javascript
+const nodeCount = 14;
+const result = maxHeight(nodeCount);
+console.log(result);
+```
+
+```terminal
+13
+```
+
+### maxNodes(ℎ)
+
+Returns the largest number of nodes that can fit into a binary tree of
+height ℎ.
+
+```javascript
+const height = 10;
+const result = maxNodes(height);
+console.log(result);
+```
+
+```terminal
+2047
+```
+
+### minHeight(𝑛)
+
+Given the number of nodes 𝑛, returns the height of the shortest possible
+binary tree that can contain 𝑛 nodes.
+
+```javascript
+const nodeCount = 14;
+const result = minHeight(nodeCount);
+console.log(result);
+```
+
+```terminal
+3
+```
+
+### minNodes(ℎ)
+
+Returns the smallest number of nodes that can fit into a binary tree of
+height ℎ.
+
+```javascript
+import { num } from "@num";
+
+const height = 10;
+const result = minNodes(height);
+console.log(result);
+```
+
+```terminal
+11
+```
+
+## Matrix
+
+The following methods are scoped to `num`'s `Matrix` module. For the
+methods below, all labeled with an 𝑀 represent a _matrix_ (also known as a
+nested array).
+
+**Note**: The matrix modules will only work with JavaScript's `number`
+type.
+
+### colCount(𝑀)
+
+Returns the number of columns in 𝑀.
+
+```javascript
+import { colCount } from "@num";
+
+const M = [
+	[1, 2, 3],
+	[0, 4, 5],
+	[1, 0, 6],
+];
+
+const result = colCount(M);
+
+Print(result);
+```
+
+```terminal
+3
+```
+
+### rowCount(𝑀)
+
+Returns the number of rows in 𝑀.
+
+```javascript
+import { colCount } from "@num";
+
+const M = [
+	[1, 2, 3, 8],
+	[0, 4, 5, 9],
+	[1, 0, 6, 7],
+	[2, 8, 0, 3],
+];
+
+const result = rowCount(M);
+```
+
+```terminal
+4
+```
+
+### mtxAdd(𝑀₁, 𝑀₂)
+
+Returns the matrix resulting from the _matrix addition_ of 𝑀₁ and 𝑀₂. Given
+that matrix addition is only defined on matrices of the same order, both 𝑀₁
+and 𝑀₂ must be similar (i.e., 𝑀₁ and 𝑀₂ have the same number of columns and
+the same number of rows). To determine if two matrices are similar, see the
+`mtxSim()` function.
+
+```javascript
+import { comatrix } from "@num";
+
+const A = [
+	[0, -1, 0, -1],
+	[-1, 0, -1, 0],
+	[0, -1, 0, -1],
+	[-1, 0, -1, 0],
+];
+const B = [
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+];
+
+const result = mtxAdd(A, B);
+
+Print(result);
+```
+
+```terminal
+[ 1    0    1    0  ]
+[ 0    1    0    1  ]
+[ 1    0    1    0  ]
+[ 0    1    0    1  ]
+```
+
+### mtxSub(𝑀₁, 𝑀₂)
+
+Returns the matrix resulting from the _matrix subtraction_ of 𝑀₁ and 𝑀₂.
+Like matrix addition, matrix subtraction is only defined on matrices of the
+same order, both 𝑀₁ and 𝑀₂ must be similar — 𝑀₁ and 𝑀₂ have the same number
+of columns and the same number of rows. To determine if two matrices are
+similar, see the `mtxSim()` function.
+
+```javascript
+import { mtxSub } from "@num";
+
+const A = [
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+];
+const B = [
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+];
+
+const result = mtxSub(A, B);
+
+Print(result);
+```
+
+```terminal
+[ 0    0    0    0  ]
+[ 0    0    0    0  ]
+[ 0    0    0    0  ]
+[ 0    0    0    0  ]
+```
+
+### mtxSim(𝑀₁, 𝑀₂)
+
+Returns `true` if 𝑀₁ and 𝑀₂ have the same number of rows and columns,
+`false` otherwise.
+
+```javascript
+import { mtxSim } from "@num";
+
+const A = [
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+];
+const B = [
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+	[1, 1, 1, 1],
+];
+
+const C = [
+	[1, 2, 3],
+	[0, 4, 5],
+	[1, 0, 6],
+	[2, 8, 0],
+];
+
+const AsimB = mtxSim(A, B);
+
+Print(AsimB);
+
+const AsimC = mtxSim(A, C);
+
+Print(AsimC);
+```
+
+```terminal
+true
+false
+```
+
+### comatrix(𝑀)
+
+Returns the _comatrix_ (also called _cofactor matrix_) of 𝑀.
+
+```javascript
+import { comatrix } from "@num";
+
+const M = [
+	[1, 2, 3],
+	[0, 4, 5],
+	[1, 0, 6],
+];
+
+const result = comatrix(M);
+
+Print(result);
+```
+
+```terminal
+[ 24    5    -4  ]
+[ -12    3    2  ]
+[ -2    -5    4  ]
+```
+
+### isDiagonal(𝑀)
+
+Returns `true` if 𝑀 is a diagonal matrix, `false` otherwise:
+
+```javascript
+const A1 = [
+	[1, 0, 0, 0, 0],
+	[0, 2, 0, 0, 0],
+	[0, 0, 3, 0, 0],
+	[0, 0, 0, 4, 0],
+	[0, 0, 0, 0, 5],
+];
+
+const A2 = [
+	[1, 0, 0, 0, 0],
+	[0, 2, 0, 0, 0],
+	[0, 0, 3, 0, 7],
+	[0, 0, 0, 4, 0],
+	[0, 0, 0, 0, 5],
+];
+
+const A1isDiagonal = isDiagonal(A1);
+const A2isDiagonal = isDiagonal(A2);
+
+Print(A1isDiagonal);
+Print(A2isDiagonal);
+```
+
+```terminal
+true
+false
+```

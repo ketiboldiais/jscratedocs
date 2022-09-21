@@ -1,0 +1,163 @@
+---
+sidebar_label: "Min Heap"
+---
+
+import { Tree, StaticArray } from "@site/src/components/dist";
+
+# MinHeap
+
+The `MinHeap` module implements a minimum binary heap. Essentially, a
+binary search tree where all parent nodes are smaller than child nodes.
+
+<Tree
+	data={[
+		[6, [81, 87]],
+		[81, [14, 17]],
+		[87, [12, 28]],
+		[14, [71, 25]],
+		[17, [80, 20]],
+		[12, [52, 78]],
+		[28, [31, 42]],
+	]}
+	width={500}
+	height={400}
+	cheight={0.4}
+	slim={40}
+	edgeLength={140}
+/>
+
+`MinHeap` is implemented with using an array. Given a child node at index
+${n,}$ its parent's index ${P(n)}$ is computed using the formula:
+
+$$
+	P(n) = \left\lfloor \dfrac{n-1}{2} \right\rfloor
+$$
+
+For example, a `MinHeap` like the tree above would be stored as:
+
+<StaticArray
+	data={[6, 81, 87, 14, 17, 12, 28, 71, 25, 80, 20, 52, 78, 31, 42]}
+	width={500}
+	cheight={0.15}
+/>
+
+Thus, given the child node 78 (at index 12), the parent node is found at:
+
+$$
+\begin{aligned}
+	P(15) &= \left\lfloor \dfrac{12-1}{2} \right\rfloor \\[1em]
+	&= \left\lfloor \dfrac{11}{2} \right\rfloor \\[1em]
+	&= \left\lfloor 5.5 \right\rfloor \\[1em]
+	&= 5
+\end{aligned}
+$$
+
+Similarly, given a parent node at index ${n,}$ its left child's index
+${L(n)}$ is found at:
+
+$$
+	L(n) = 2n+1
+$$
+
+and its right child's index ${R(n)}$ can be found at:
+
+$$
+	R(n) = 2n+2;
+$$
+
+## `minHeap()`
+
+- Instantiates an instance of `MinHeap`.
+- If no arguments are passed, the heap is initially empty.
+- Otherwise, comma separated data values (or a spread of an array of data
+  values) will be used to populate the heap.
+
+```javascript
+const h = minHeap(1, 8, 6, 5, 3, 9);
+h.print();
+```
+
+```terminal
+[1,3,6,8,5,9]
+```
+
+## `push(𝑣)`
+
+- Inserts the value 𝑣 into the heap.
+- Return: `this`
+- Worst Case: ${O(\lg n)}$
+- Average Case: ${O(\lg n)}$
+
+```javascript
+const h = minHeap().push(1).push(8).push(6).push(5).push(3).push(9);
+h.print();
+```
+
+```terminal
+[1,3,6,8,5,9]
+```
+
+## `insert(v[])`
+
+- Takes an array argument, and pushes each array element into the heap.
+
+```javascript
+const h = minHeap().insert([1, 8, 6, 5, 3, 9]);
+h.print();
+```
+
+## `delete()`
+
+- Removes the smallest value in the heap.
+- Return:
+  - If the heap is not empty: The value deleted.
+  - If the heap is empty: null.
+- Worst case: ${O(\lg n)}$
+- Best case: ${O(\lg n)}$
+
+```javascript
+const h = minHeap().insert([1, 8, 6, 5, 3, 9]);
+h.print();
+h.delete();
+h.print();
+```
+
+```terminal
+[1,3,6,8,5,9]
+[3,5,6,8,9]
+```
+
+## `min()`
+
+- Returns the smallest value in the heap, without mutating the heap.
+- If the heap is empty, returns `null`.
+- Because the smallest value in the heap is always the first element, this
+  is a trivial ${O(1)}$ operation.
+
+```javascript
+const h = minHeap().insert([1, 8, 6, 5, 3, 9]);
+const m = h.min();
+Print(m);
+```
+
+```terminal
+1
+```
+
+## `max()`
+
+- Returns the largest value in the heap, without mutating the heap.
+- Because the a min heap prioritizes the lesser of two values, this
+  requires iterating over ${n/2}$ nodes (only the leaf nodes can possibly
+  containing a maximum). Accordingly, this has a running time function of
+  ${T(n) = n/2,}$ or, in big-O terms, ${O(n).}$
+
+```javascript
+const h = minHeap().insert([1, 8, 6, 5, 3, 9]);
+const m = h.max();
+Print(m);
+```
+
+```terminal
+9
+```

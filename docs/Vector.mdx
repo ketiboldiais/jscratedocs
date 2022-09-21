@@ -1,0 +1,171 @@
+# Vector
+
+The `Vector` namespace provides the following containers:
+
+- `Vector.int8`
+- `Vector.uint8`
+- `Vector.uint8Clamped`
+- `Vector.int16`
+- `Vector.int32`
+- `Vector.uint32`
+- `Vector.float32`
+- `Vector.float64`
+- `Vector.bigint64`
+- `Vector.biguint64`
+
+Each of these submodules implements a _typed dynamic array_. The submodules
+map to JavaScript's typed arrays. By default, typed arrays in JavaScript
+have a set size once instantiated. The `Vector` module provides a way to
+use the typed arrays as dynamic arrays.
+
+For most applications, JavaScript's usual array object suffices. The
+`Vector` submodules are mainly used as auxiliary data structures for some
+of jsCrate's internals and testing suites, but are provided here for public
+availability.
+
+All instances `Vector` have the API listed below, with a few caveats,
+highlighted accordingly.
+
+## Constructor
+
+To instantiate a vector, import the `Vector` namespace and call the
+constructor. An optional comma separated list of values can be passed to
+initialize the vector immediately:
+
+```javascript
+import { Vector } from "@crates";
+
+const int8 = Vector.int8(1, -2, -3, 4, 5);
+const uint8 = Vector.uint8(0, 1, 7, 4, 9);
+const uint8c = Vector.uint8Clamped(9, 2, 8, 4, 7);
+const int16 = Vector.int16(39, 19, 72, 21, 55);
+const int32 = Vector.int32(9, 12, 13, 4, 25);
+const uint32 = Vector.uint32(35, 210, 313, 215, 512);
+const float32 = Vector.float32(1.1, 2.8, 3.7, 4.9, 5.1);
+const float64 = Vector.float64(34.8, 9.8, 3.7, 4.6, 5.2);
+const bigint64 = Vector.bigint64(1n, 5n, 7n, 8n, 9n);
+const biguint64 = Vector.biguint64(12n, 17n, 10n, 15n);
+
+console.log(int8);
+console.log(uint8);
+console.log(uint8c);
+console.log(int16);
+console.log(int32);
+console.log(uint32);
+console.log(float32);
+console.log(float64);
+console.log(bigint64);
+console.log(biguint64);
+```
+
+<details>
+<summary>Console Output</summary>
+
+```
+VECTOR_INT8 { type: 0,
+	count: 5,
+	capacity: 7,
+	array: Int8Array { [Iterator]  0: 1, 1: -2, 2: -3, 3: 4, 4: 5, 5: 0, 6: 0 } }
+
+VECTOR_UINT8 { type: 1,
+	count: 5,
+	capacity: 7,
+	array: Uint8Array { [Iterator]  0: 0, 1: 1, 2: 7, 3: 4, 4: 9, 5: 0, 6: 0 } }
+
+VECTOR_UINT8C { type: 2,
+	count: 5,
+	capacity: 7,
+	array: Uint8ClampedArray { [Iterator]  0: 9, 1: 2, 2: 8, 3: 4, 4: 7, 5: 0, 6: 0 } }
+
+VECTOR_INT16 { type: 3,
+	count: 5,
+	capacity: 7,
+	array: Int16Array { [Iterator]  0: 39, 1: 19, 2: 72, 3: 21, 4: 55, 5: 0, 6: 0 } }
+
+VECTOR_INT32 { type: 5,
+	count: 5,
+	capacity: 7,
+	array: Int32Array { [Iterator]  0: 9, 1: 12, 2: 13, 3: 4, 4: 25, 5: 0, 6: 0 } }
+
+VECTOR_UINT32 { type: 6,
+	count: 5,
+	capacity: 7,
+	array: Uint32Array { [Iterator]  0: 35, 1: 210, 2: 313, 3: 215, 4: 512, 5: 0, 6: 0 } }
+
+VECTOR_FLOAT32 { type: 7,
+	count: 5,
+	capacity: 7,
+	array:
+	Float32Array { [Iterator]
+		0: 1.100000023841858,
+		1: 2.799999952316284,
+		2: 3.700000047683716,
+		3: 4.900000095367432,
+		4: 5.099999904632568,
+		5: 0,
+		6: 0 } }
+
+VECTOR_FLOAT64 { type: 8,
+	count: 5,
+	capacity: 7,
+	array: Float64Array { [Iterator]  0: 34.8, 1: 9.8, 2: 3.7, 3: 4.6, 4: 5.2, 5: 0, 6: 0 } }
+
+VECTOR_BIGINT64 { type: 9,
+	count: 5,
+	capacity: 7,
+	array: BigInt64Array { [Iterator]  0: 1, 1: 5, 2: 7, 3: 8, 4: 9, 5: 0, 6: 0 } }
+
+VECTOR_BIGUINT64 { type: 10,
+	count: 4,
+	capacity: 7,
+	array: BigUint64Array { [Iterator]  0: 12, 1: 17, 2: 10, 3: 15, 4: 0, 5: 0, 6: 0 } }
+```
+
+</details>
+
+For readability, the remaining examples will use `Vector.int8`.
+
+## 𝑉.pairSum(𝑆)
+
+Returns a new vector of type 𝑉 containing the numbers that sum to 𝑆. If no
+such pair exists, `null` is returned.
+
+```javascript
+import { Vector } from "@crates";
+import { Print } from "@util";
+
+const vect = Vector.int8(10, 5, 2, 3, -6, 9, 11);
+
+const pairSum = vect.pairSum(4);
+
+Print(pairSum);
+```
+
+```terminal
+[10,-6]
+```
+
+## 𝑉.maxBandLength()
+
+Returns the size of the largest subset in the vector containing consecutive
+numbers.
+
+```javascript
+import { Vector } from "@crates";
+import { Print } from "@util";
+
+const vect = Vector.int8(1, 9, 3, 0, 18, 5, 2, 4, 10, 7, 12, 6);
+
+const longestBandLength = vect.maxBandLength();
+Print(longestBandLength);
+```
+
+```terminal
+8
+```
+
+In the example above, the largest subset is:
+
+$$
+	\{ 0,1,2,3,4,5,6,7 \}
+$$

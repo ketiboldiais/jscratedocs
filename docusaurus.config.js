@@ -8,7 +8,7 @@ const katex = require("rehype-katex");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-	title: "jsCrate",
+	title: "jscrate",
 	tagline: "A JavaScript data structures and algorithms library.",
 	url: "https://ketiboldiais.github.io",
 	baseUrl: "/",
@@ -19,7 +19,7 @@ const config = {
 	// GitHub pages deployment config.
 	// If you aren't using GitHub pages, you don't need these.
 	organizationName: "ketiboldiais", // Usually your GitHub org/user name.
-	projectName: "jscrate", // Usually your repo name.
+	projectName: "jscratedocs", // Usually your repo name.
 	i18n: {
 		defaultLocale: "en",
 		locales: ["en"],

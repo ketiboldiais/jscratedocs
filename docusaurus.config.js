@@ -20,7 +20,6 @@ const config = {
 	// If you aren't using GitHub pages, you don't need these.
 	organizationName: "ketiboldiais", // Usually your GitHub org/user name.
 	projectName: "jscrate", // Usually your repo name.
-	deploymentBranch: "main",
 	i18n: {
 		defaultLocale: "en",
 		locales: ["en"],

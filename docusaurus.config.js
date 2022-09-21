@@ -11,7 +11,7 @@ const config = {
 	title: "jscrate",
 	tagline: "A JavaScript data structures and algorithms library.",
 	url: "https://ketiboldiais.github.io",
-	baseUrl: "/jscratedocs/",
+	baseUrl: "/",
 	onBrokenLinks: "throw",
 	onBrokenMarkdownLinks: "warn",
 	favicon: "img/favicon.ico",

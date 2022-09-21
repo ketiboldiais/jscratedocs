@@ -16,6 +16,7 @@ const config = {
 	onBrokenMarkdownLinks: "warn",
 	favicon: "img/favicon.ico",
 	organizationName: "ketiboldiais", // Usually your GitHub org/user name.
+	deploymentBranch: "main",
 	projectName: "jscratedocs", // Usually your repo name.
 	i18n: {
 		defaultLocale: "en",

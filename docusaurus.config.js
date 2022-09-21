@@ -11,14 +11,11 @@ const config = {
 	title: "jscrate",
 	tagline: "A JavaScript data structures and algorithms library.",
 	url: "https://ketiboldiais.github.io",
-	baseUrl: "/",
+	baseUrl: "/jscratedocs/",
 	onBrokenLinks: "throw",
 	onBrokenMarkdownLinks: "warn",
 	favicon: "img/favicon.ico",
 	trailingSlash: false,
-
-	// GitHub pages deployment config.
-	// If you aren't using GitHub pages, you don't need these.
 	organizationName: "ketiboldiais", // Usually your GitHub org/user name.
 	projectName: "jscratedocs", // Usually your repo name.
 	i18n: {

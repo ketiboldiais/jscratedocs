@@ -43,32 +43,18 @@
 	font-style: italic;
 }
 html {
-	font-family: "RobotoMono";
+	font-family: "Charter", "Georgia", serif;
 	font-size: 0.8rem;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: "RobotoMono";
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Charter", "Georgia", sans-serif;
 }
-h1 {
-	font-size: 2.3em;
-}
-h2 {
-	font-size: 1.5em;
-}
-h3 {
-	font-size: 1.3em;
-}
-h4 {
-	font-size: 1.2em;
-}
-h5 {
-	font-size: 1.1em;
-}
+h1 { font-size: 2.3em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.3em; }
+h4 { font-size: 1.2em; }
+h5 { font-size: 1.1em; }
+code {font-family: "Courier"; border: 0; background-color: unset;}
 table {
 	width: fit-content;
 	margin: 1% auto;
@@ -81,18 +67,12 @@ table td {
 table th {
 	padding: 0 0.5em;
 }
-a {
-	white-space: nowrap;
-}
-.alert {
-	background-color: rgb(248, 255, 255);
-}
-summary {
-	color: rgba(0, 0, 0, 0.742);
-}
+a { white-space: nowrap; }
+.alert { background-color: rgb(248, 255, 255); }
+summary { color: rgba(0, 0, 0, 0.742); }
 
 [data-theme="dark"] {
-	--ifm-color-primary: #494d4d;
+	--ifm-color-primary: #6dffec;
 	--ifm-color-primary-dark: #21af90;
 	--ifm-color-primary-darker: #1fa588;
 	--ifm-color-primary-darkest: #1a8870;

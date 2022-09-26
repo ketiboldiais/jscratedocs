@@ -30,6 +30,7 @@ const config = {
 			/** @type {import('@docusaurus/preset-classic').Options} */
 			({
 				docs: {
+					routeBasePath: '/',
 					sidebarPath: require.resolve("./sidebars.js"),
 					// Please change this to your repo.
 					// Remove this to remove the "edit this page" links.
@@ -65,18 +66,18 @@ const config = {
 		/** @type {import('@docusaurus/preset-classic').ThemeConfig} */
 		({
 			navbar: {
-				title: "jsCrate",
+				title: "jscrate",
 				// logo: {
 				//   alt: 'My Site Logo',
 				//   src: 'img/logo.svg',
 				// },
 				items: [
-					{
-						type: "doc",
-						docId: "overview",
-						position: "left",
-						label: "Modules",
-					},
+					// {
+					// 	type: "doc",
+					// 	docId: "overview",
+					// 	position: "left",
+					// 	label: "Modules",
+					// },
 					// {to: '/blog', label: 'Blog', position: 'left'},
 					// {
 					// 	href: "https://github.com/facebook/docusaurus",

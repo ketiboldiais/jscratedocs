@@ -1,8 +1,30 @@
 ---
 sidebar_label: "Overview"
 sidebar_position: 1
+slug: /
 ---
 
 # Overview
 
-jsCrate provides a variety of containers and algorithm APIs.
+JSCrate is a collection of containers and methods in JavaScript, implemented in TypeScript. Brief descriptions are provided below, and more detailed descriptions are provided in the module sections via menu. 
+
+
+| Module        | Description                                                                                                                                                                              |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Math          | Mathematical procedures.                                                                                                                                                                 |
+| Sort          | Sorting procedures.                                                                                                                                                                      |
+| String        | Operations on strings.                                                                                                                                                                   |
+| Bitset        | Bitstring/bit array.                                                                                                                                                                     |
+| Vector        | Implementation of JavaScript's typed arrays as dynamic vectors.                                                                                                                          |
+| Queue         | Lightweight queue; uses the standard JavaScript `array`.                                                                                                                                 |
+| List          | Singly-linked list.                                                                                                                                                                      |
+| DList         | Doubly-linked list, inherits from List.                                                                                                                                                  |
+| CList         | Circular singly-linked list.                                                                                                                                                             |
+| MaxHeap       | Maximum heap.                                                                                                                                                                            |
+| MinHeap       | Minimum heap.                                                                                                                                                                            |
+| PriorityQueue | Implementation uses a mininmum heap.                                                                                                                                                     |
+| BST           | Binary search tree implementation; user-input comparison function supported.                                                                                                             |
+| AVL           | AVL tree implementation, following Adelson-Velskii and Landis's 1962 paper _[An Algorithm for the Organization of Information](https://zhjwpku.com/assets/pdf/AED2-10-avl-paper.pdf)._   |
+| Graph         | Simple graph; implementation uses adjacency list approach (specifically, a JavaScript `map`).                                                                                            |
+| WeightedGraph | Weighted graph; inherits from simple graph.                                                                                                                                              |
+| Trie          | Basic trie; uses a tree-like structure where each node is an array. By default, only the ASCII Latin characters are supported, but the alphabet can be extended (at the cost of memory). |

@@ -18,7 +18,9 @@ const FeatureList = [
 	{
 		title: "Math API",
 		description: (
-			<>Implements a variety of math-related algorithms and functions</>
+			<ul>
+				<li>Sorting algorithms</li>
+			</ul>
 		),
 	},
 	{
